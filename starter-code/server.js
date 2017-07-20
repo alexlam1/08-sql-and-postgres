@@ -25,12 +25,10 @@ const client = new pg.Client(conString);
 // REVIEW: Use the client object to connect to our DB.
 client.connect();
 
-
 // REVIEW: Install the middleware plugins so that our app is aware and can use the body-parser module
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
-
 
 // REVIEW: Routes for requesting HTML resources
 app.get('/new', function(request, response) {
@@ -38,7 +36,6 @@ app.get('/new', function(request, response) {
   // Put your response here...#5, .fetchAll(), READ
   response.sendFile('new.html', {root: './public'});
 });
-
 
 // REVIEW: Routes for making API calls to use CRUD Operations on our database
 app.get('/articles', function(request, response) {
@@ -54,8 +51,6 @@ app.get('/articles', function(request, response) {
 });
 
 app.post('/articles', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here... #2,3,4,5; insertRecord(); CREATE
   client.query(
     `
       INSERT INTO
@@ -80,8 +75,6 @@ app.post('/articles', function(request, response) {
 });
 
 app.put('/articles/:id', function(request, response) {
-  // COMMENT: What number(s) of the full-stack-diagram.png image correspond to the following line of code? Which method of article.js is interacting with this particular piece of `server.js`? What part of CRUD is being enacted/managed by this particular piece of code?
-  // Put your response here...#2,3,4,5; updateRecord(); UPDATE
   client.query(
     `UPDATE articles
     SET
